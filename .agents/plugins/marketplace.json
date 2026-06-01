@@ -1,0 +1,20 @@
+{
+  "name": "laozeng1024",
+  "interface": {
+    "displayName": "laozeng1024 plugins"
+  },
+  "plugins": [
+    {
+      "name": "codex-english-buddy",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-english-buddy"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

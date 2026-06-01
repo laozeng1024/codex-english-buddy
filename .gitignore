@@ -1,0 +1,17 @@
+.DS_Store
+AGENTS.md
+.codex-english-buddy.json
+docs/
+.env
+.env.*
+!.env.example
+node_modules/
+coverage/
+dist/
+build/
+*.log
+.cache/
+.tmp/
+tmp/
+
+CHANGELOG.md

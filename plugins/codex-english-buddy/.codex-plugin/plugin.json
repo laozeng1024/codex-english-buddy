@@ -1,0 +1,46 @@
+{
+  "name": "codex-english-buddy",
+  "version": "0.5.0-codex.6",
+  "description": "English language coach for Codex users: translate Chinese prompts, correct English prompts, and track learning reports.",
+  "author": {
+    "name": "laozeng",
+    "url": "https://github.com/laozeng1024"
+  },
+  "homepage": "https://github.com/laozeng1024/codex-english-buddy",
+  "repository": "https://github.com/laozeng1024/codex-english-buddy",
+  "license": "ISC",
+  "keywords": [
+    "english",
+    "writing",
+    "grammar",
+    "translation",
+    "prompting",
+    "non-native"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "displayName": "Codex English Buddy",
+    "shortDescription": "English coaching, writing review, and language stats for Codex",
+    "longDescription": "Codex English Buddy brings passive English coaching to Codex: prompt translation, English correction, prompt refinement, writing review, recurring-mistake reports, drills, and Codex prompt/session hooks.",
+    "developerName": "laozeng",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/laozeng1024/codex-english-buddy",
+    "privacyPolicyURL": "https://github.com/laozeng1024/codex-english-buddy/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/laozeng1024/codex-english-buddy/blob/main/LICENSE",
+    "defaultPrompt": [
+      "Review this PR description for English quality.",
+      "Show today's English Buddy report.",
+      "Refine this rough prompt with English Buddy."
+    ],
+    "brandColor": "#2563EB",
+    "composerIcon": "./assets/english-buddy.svg",
+    "logo": "./assets/english-buddy.svg",
+    "screenshots": []
+  }
+}

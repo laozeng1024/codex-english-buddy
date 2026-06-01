@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run plugin tests
+        working-directory: plugins/codex-english-buddy
+        run: npm test
+      - name: Validate plugin manifest and docs
+        working-directory: plugins/codex-english-buddy
+        run: npm run validate:codex
+      - name: Scan runtime for old Claude paths
+        run: |
+          if grep -R -n -E 'CLAUDE_PLUGIN_DATA|CLAUDE_PLUGIN_ROOT|CLAUDE_CODE_|claudepot|\.claude-english-buddy|/claude-english-buddy:' plugins/codex-english-buddy/scripts plugins/codex-english-buddy/hooks plugins/codex-english-buddy/commands plugins/codex-english-buddy/skills; then
+            echo "Old Claude runtime path or command namespace found."
+            exit 1
+          fi
+      - name: Scan public plugin files for local absolute paths
+        run: |
+          if grep -R --exclude-dir=tests -n -E '(/Users/|/opt/homebrew|/opt/anaconda3|/private/tmp)' README.md PRIVACY.md .agents/plugins/marketplace.json plugins/codex-english-buddy; then
+            echo "Local absolute path found in public plugin files."
+            exit 1
+          fi

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Codex English Buddy">
+  <rect width="256" height="256" rx="56" fill="#2563eb"/>
+  <path fill="#ffffff" d="M64 64h128v28H98v23h74v26H98v23h96v28H64z"/>
+  <path fill="#bfdbfe" d="M58 205c27-8 50-9 70-3 24 7 47 6 70-3v21c-24 9-48 10-72 3-20-6-42-5-68 4z"/>
+  <circle cx="185" cy="75" r="13" fill="#93c5fd"/>
+</svg>

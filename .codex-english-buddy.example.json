@@ -1,0 +1,17 @@
+{
+  "engine": "host_model",
+  "codex_cli_model": null,
+  "codex_cli_binary": null,
+  "codex_cli_timeout_sec": 45,
+  "auto_correct": true,
+  "clean_english_notice": false,
+  "summary_language": null,
+  "strictness": "standard",
+  "domain_terms": [
+    "Codex"
+  ],
+  "sensitive_patterns": [
+    "SECRET_[A-Z0-9]+",
+    "sk-[A-Za-z0-9]+"
+  ]
+}

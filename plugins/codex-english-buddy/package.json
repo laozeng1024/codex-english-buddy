@@ -1,0 +1,16 @@
+{
+  "name": "codex-english-buddy",
+  "version": "0.5.0-codex.6",
+  "private": true,
+  "type": "module",
+  "description": "English language coach for Codex users: translate, correct, refine, and track improvement over time",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "test": "sh scripts/run-node.sh --test tests/*.test.mjs",
+    "buddy": "sh scripts/run-node.sh scripts/english-buddy.mjs",
+    "validate:codex": "sh scripts/run-node.sh scripts/validate-codex-plugin.mjs"
+  }
+}

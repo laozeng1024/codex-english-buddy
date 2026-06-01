@@ -1,0 +1,30 @@
+{
+  "description": "English language coaching — auto-correct prompts and summarize sessions.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "description": "Intentionally global — hook matchers do not support the content-based filters this plugin needs, so filtering must happen inside the hook script. The Node script at scripts/prompt-coach-hook.mjs skips: (1) slash commands (prompts starting with `/`), (2) prompts entirely inside a triple-backtick fenced code block, (3) prompts under 10 characters, (4) prompts that look like raw code (detected by token shape), (5) prompts matching configured sensitive_patterns. These filters exit 0 immediately so the host sees no systemMessage and no additionalContext.",
+        "_acceptable_scope": "Content-based filtering is impossible at the hook-config layer on the current hook schema; it must live in the script. This is acceptable because the script's fast path is a handful of regex checks before any API or node import cost.",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'root=${CODEX_PLUGIN_ROOT:-}; if [ -z \"$root\" ]; then for dir in \"$PWD\" \"$PWD/plugins/codex-english-buddy\"; do if [ -f \"$dir/scripts/run-hook.sh\" ]; then root=$dir; break; fi; done; fi; if [ -z \"$root\" ]; then for dir in \"$HOME/.codex/plugins/cache\"/*/codex-english-buddy/*; do if [ -f \"$dir/scripts/run-hook.sh\" ]; then root=$dir; fi; done; fi; if [ -z \"$root\" ]; then echo \"codex-english-buddy: unable to locate plugin root; CODEX_PLUGIN_ROOT is not set\" >&2; exit 127; fi; exec sh \"$root/scripts/run-hook.sh\" \"$root/scripts/prompt-coach-hook.mjs\"'",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'root=${CODEX_PLUGIN_ROOT:-}; if [ -z \"$root\" ]; then for dir in \"$PWD\" \"$PWD/plugins/codex-english-buddy\"; do if [ -f \"$dir/scripts/run-hook.sh\" ]; then root=$dir; break; fi; done; fi; if [ -z \"$root\" ]; then for dir in \"$HOME/.codex/plugins/cache\"/*/codex-english-buddy/*; do if [ -f \"$dir/scripts/run-hook.sh\" ]; then root=$dir; fi; done; fi; if [ -z \"$root\" ]; then echo \"codex-english-buddy: unable to locate plugin root; CODEX_PLUGIN_ROOT is not set\" >&2; exit 127; fi; exec sh \"$root/scripts/run-hook.sh\" \"$root/scripts/session-end-hook.mjs\"'",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

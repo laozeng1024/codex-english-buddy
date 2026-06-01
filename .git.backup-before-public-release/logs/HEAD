@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 413f978f45a23d1f487221532c46c0cc7c9de9c8 老曾 <laozeng@LZs-MacBook-Pro.local> 1779866198 +0800	commit (initial): version1
+413f978f45a23d1f487221532c46c0cc7c9de9c8 16b8de43e7b60b3e95a91264ba226e796fbc7d20 老曾 <laozeng@LZs-MacBook-Pro.local> 1779874367 +0800	commit: 修复cli -english-buddy:today调用问题
+16b8de43e7b60b3e95a91264ba226e796fbc7d20 1825f2a60d34e36b6f63d6c35eb355907c2cfdfd 老曾 <laozeng@LZs-MacBook-Pro.local> 1779884842 +0800	commit: 按照github公开版本做修改优化
+1825f2a60d34e36b6f63d6c35eb355907c2cfdfd 596eb3b04486916a249a7225eef52496b26e3f35 老曾 <laozeng@LZs-MacBook-Pro.local> 1780313421 +0800	commit: Prepare Codex English Buddy public release
