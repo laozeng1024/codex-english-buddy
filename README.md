@@ -1,16 +1,16 @@
 # Codex English Buddy
 
-Codex English Buddy is a Codex plugin that helps non-native English users write better prompts. It translates Chinese or other non-English prompts into natural English, checks English prompts for clarity and correctness, and keeps local language-learning reports.
+Codex English Buddy 是一个面向 Codex 用户的英语提示词助手。它可以把中文或其他非英语输入翻译成自然英文，也可以检查英文提示词的语法、拼写、用词和自然度，并在本地保留语言学习报告。
 
-Repository: <https://github.com/laozeng1024/codex-english-buddy>
+仓库地址：<https://github.com/laozeng1024/codex-english-buddy>
 
-The installable plugin lives in `plugins/codex-english-buddy`.
+English README [README.en.md](README.en.md)。
 
-Language: English is the default README. 中文文档见 [README.zh-CN.md](README.zh-CN.md)。
+可安装插件位于 `plugins/codex-english-buddy`。
 
-## Install From GitHub
+## 从 GitHub 安装
 
-Clone this repository and register it as a local Codex marketplace:
+克隆仓库，并把它注册为本地 Codex marketplace：
 
 ```bash
 git clone https://github.com/laozeng1024/codex-english-buddy.git
@@ -19,15 +19,15 @@ codex plugin marketplace add "$PWD"
 codex plugin add codex-english-buddy@laozeng1024
 ```
 
-Then enable `codex-english-buddy` through Codex's normal plugin flow and trust the bundled hook when prompted. Normal users should not edit `~/.codex/config.toml`, copy local absolute paths, or hardcode a `trusted_hash`.
+然后在 Codex 的插件流程里启用 `codex-english-buddy`，并在提示时信任插件自带 hook。普通用户不需要手动编辑 `~/.codex/config.toml`，不需要复制本机绝对路径，也不应该手写 `trusted_hash`。
 
-Official Codex Marketplace distribution is a future/to-be-confirmed path. This repository currently documents the reproducible GitHub + local marketplace installation flow.
+官方 Codex Marketplace 发布路径目前仍是未来/待确认事项。本仓库当前提供可复现的 GitHub + 本地 marketplace 安装方式。
 
-## Usage
+## 使用方式
 
-Default engine: `host_model`
+默认引擎：`host_model`
 
-The default hook does not require provider credentials. It injects prompt-coaching instructions into Codex so the active model shows the transformed prompt first:
+默认 hook 不需要 provider 凭据。它会向 Codex 注入提示词教练规则，让当前 Codex 主模型先显示转换后的提示词：
 
 ```text
 Translated (Chinese): ...
@@ -35,87 +35,87 @@ Corrected: ...
 Refined: ...
 ```
 
-Codex Desktop surfaces plugin actions through skills. After install or update, start a new thread or refresh skills before trying:
+Codex Desktop 通过 skills 暴露插件动作。安装或更新后，建议新开会话或刷新 skills，再尝试：
 
 ```text
 /codex-english-buddy:doctor
 ```
 
-In Codex CLI, use the skill-backed form:
+Codex CLI 中请使用 skill-backed 形式：
 
 ```text
 $codex-english-buddy:today
 ```
 
-Do not treat `/codex-english-buddy:today` as the primary CLI path unless the current CLI `/` menu lists it.
+除非当前 CLI 的 `/` 菜单列出了 `/codex-english-buddy:today`，否则不要把它作为 CLI 主路径。
 
-## Commands
+## 命令列表
 
-Codex Desktop and future hosts may expose slash-style skill entries. In Codex CLI, prefer the `$...` skill-backed form.
+Codex Desktop 和未来宿主可能会暴露 slash-style skill entries。在 Codex CLI 中，优先使用 `$...` skill-backed 形式。
 
-| Purpose | Desktop / Skill Host | Codex CLI Chat |
+| 用途 | Desktop / Skill 宿主 | Codex CLI Chat |
 |---|---|---|
-| Diagnose install, hook trust, engine, and history quality | `/codex-english-buddy:doctor` | `$codex-english-buddy:doctor` |
-| Show or update configuration | `/codex-english-buddy:config` | `$codex-english-buddy:config` |
-| Preview prompt detection without submitting | `/codex-english-buddy:preview` | `$codex-english-buddy:preview` |
-| Show today's language report | `/codex-english-buddy:today` | `$codex-english-buddy:today` |
-| Show multi-day statistics | `/codex-english-buddy:stats` | `$codex-english-buddy:stats` |
-| Show recurring mistakes | `/codex-english-buddy:mistakes` | `$codex-english-buddy:mistakes` |
-| Generate practice drills | `/codex-english-buddy:drill` | `$codex-english-buddy:drill` |
-| Export full-history records | `/codex-english-buddy:export` | `$codex-english-buddy:export` |
-| Review a piece of English writing | `/codex-english-buddy:review` | `$codex-english-buddy:review` |
+| 诊断安装、hook trust、引擎和历史质量 | `/codex-english-buddy:doctor` | `$codex-english-buddy:doctor` |
+| 查看或更新配置 | `/codex-english-buddy:config` | `$codex-english-buddy:config` |
+| 预览提示词检测，不提交任务 | `/codex-english-buddy:preview` | `$codex-english-buddy:preview` |
+| 查看今日语言报告 | `/codex-english-buddy:today` | `$codex-english-buddy:today` |
+| 查看多日统计 | `/codex-english-buddy:stats` | `$codex-english-buddy:stats` |
+| 查看 recurring mistakes | `/codex-english-buddy:mistakes` | `$codex-english-buddy:mistakes` |
+| 生成练习题 | `/codex-english-buddy:drill` | `$codex-english-buddy:drill` |
+| 导出 full-history records | `/codex-english-buddy:export` | `$codex-english-buddy:export` |
+| 深度审阅英文文本 | `/codex-english-buddy:review` | `$codex-english-buddy:review` |
 
-Native CLI slash commands such as `/codex-english-buddy:today` are supported only when your current host lists them in its `/` menu.
+`/codex-english-buddy:today` 这类原生 CLI slash commands 只有在当前宿主的 `/` 菜单列出时才可用。
 
-## Usage Examples
+## 使用示例
 
-### Translate A Chinese Prompt
+### 翻译中文提示词
 
-Type this in Codex:
+在 Codex 中输入：
 
 ```text
 帮我检查这个 PR 里的测试失败原因
 ```
 
-English Buddy asks Codex to show the transformed prompt first:
+English Buddy 会要求 Codex 先展示转换后的提示词：
 
 ```text
 Translated (Chinese): Help me investigate why the tests are failing in this PR.
 ```
 
-Codex then continues using that English request.
+然后 Codex 会继续按这个英文请求执行。
 
-### Correct An English Prompt
+### 修正英文提示词
 
-Type:
+输入：
 
 ```text
 please help me check why this tests is failed
 ```
 
-Expected first line:
+预期第一行：
 
 ```text
 Corrected: Please help me check why these tests failed.
 ```
 
-### Refine A Rough Prompt
+### 优化粗略提示词
 
-Use `::` when you want English Buddy to turn rough notes into a clearer Codex request:
+当你想把零散想法改成更清晰的 Codex 请求时，可以使用 `::`：
 
 ```text
 :: fix auth bug, add tests, keep change small
 ```
 
-Expected first line:
+预期第一行：
 
 ```text
 Refined: Fix the authentication bug, add focused tests, and keep the change narrowly scoped.
 ```
 
-### Check Reports And Practice
+### 查看统计和练习
 
-In Codex CLI, use skill-backed report entries:
+在 Codex CLI 中使用 skill-backed 报告入口：
 
 ```text
 $codex-english-buddy:today
@@ -124,7 +124,7 @@ $codex-english-buddy:drill
 $codex-english-buddy:export
 ```
 
-Example `today` summary:
+`today` 摘要示例：
 
 ```text
 # Today's Language Report - 2026-05-27
@@ -135,7 +135,7 @@ English check requests: 3
 Refinements: 2
 ```
 
-Example `mistakes` output when recurring full-history pairs exist:
+当存在 recurring full-history correction pairs 时，`mistakes` 可能输出：
 
 ```text
 | # | You Write | Should Be | Times | Category |
@@ -144,7 +144,7 @@ Example `mistakes` output when recurring full-history pairs exist:
 | 2 | in shell | in the shell | 2 | article |
 ```
 
-Example `drill` prompt:
+`drill` 练习题示例：
 
 ```text
 Your recurring pattern: this tests -> these tests
@@ -152,9 +152,9 @@ Sentence: Please update the PR description because this tests still appears in t
 Rewrite this sentence to fix the target error.
 ```
 
-`today` works with limited `host_model` history. `mistakes` and `drill` need recurring full-history correction pairs from `codex_cli` or another verified capture path.
+`today` 可以基于 limited `host_model` history 工作。`mistakes` 和 `drill` 需要来自 `codex_cli` 或其他已验证捕获路径的 recurring full-history correction pairs。
 
-Example `export` output:
+`export` 输出示例：
 
 ```text
 Export written: .../exports/english-buddy-export-2026-04-28_2026-05-27-2026-05-27T09-30-00Z.md
@@ -162,11 +162,11 @@ Exported full records: 8
 Skipped limited records: 4
 ```
 
-### Export Records
+### 导出记录
 
-`$codex-english-buddy:export` exports original prompts and transformed text from full-history records. Limited records are counted in the summary, but their prompt text is not exported.
+`$codex-english-buddy:export` 会从 full-history records 中导出原始提示词和转换后的文本。limited records 只在摘要里计数，不导出提示词正文。
 
-Common forms:
+常用形式：
 
 ```text
 $codex-english-buddy:export
@@ -178,33 +178,33 @@ $codex-english-buddy:export --format csv
 $codex-english-buddy:export --format json
 ```
 
-Options:
+参数说明：
 
-- `--date YYYY-MM-DD`: export exactly one day.
-- `--days N`: export the latest N-day window. The default is 30 days.
-- `--since YYYY-MM-DD --until YYYY-MM-DD`: export an inclusive date range.
-- `--format markdown|csv|json`: choose the output format. The default is `markdown`.
-- `--output path`: write to a specific file path. Existing files are not overwritten unless `--force` is also supplied.
-- `--stdout`: print the export instead of writing a file.
-- `--force`: allow `--output` to overwrite an existing file.
+- `--date YYYY-MM-DD`：只导出指定单日。
+- `--days N`：导出最近 N 天，默认 30 天。
+- `--since YYYY-MM-DD --until YYYY-MM-DD`：导出包含起止日期的范围。
+- `--format markdown|csv|json`：选择输出格式，默认是 `markdown`。
+- `--output path`：写入指定文件；如果文件已存在，必须同时加 `--force` 才会覆盖。
+- `--stdout`：只打印导出内容，不写文件。
+- `--force`：允许 `--output` 覆盖已有文件。
 
-Use only one range selector at a time: `--date`, `--days`, or `--since/--until`.
+日期范围参数三选一：`--date`、`--days`、`--since/--until` 不能混用。
 
-## Reports
+## 报告
 
-`host_model` history is limited: it records prompt category and original input, but not exact corrected text or annotations. Full recurring-mistake reports and drills require full-history records from the optional `codex_cli` engine.
+`host_model` 历史是 limited：它只记录提示词类型和原始输入，不记录精确 corrected text 或 annotations。完整 recurring mistakes 和 drill 需要可写 full-history 的可选 `codex_cli` 引擎。
 
-## Enable Full-History Mode
+## 启用完整历史模式
 
-Use `codex_cli` only when you want verified full-history records for recurring mistakes, drills, and exports.
+只有当你需要 recurring mistakes、drill 和 export 使用已验证 full-history records 时，才需要启用 `codex_cli`。
 
-From `plugins/codex-english-buddy`, enable it for the current project:
+在 `plugins/codex-english-buddy` 目录下，为当前项目启用：
 
 ```bash
 sh scripts/run-node.sh scripts/english-buddy.mjs config --set engine=codex_cli
 ```
 
-Or create `.codex-english-buddy.json` in the project where you use Codex:
+也可以在使用 Codex 的项目根目录创建 `.codex-english-buddy.json`：
 
 ```json
 {
@@ -214,31 +214,31 @@ Or create `.codex-english-buddy.json` in the project where you use Codex:
 }
 ```
 
-If the hook cannot find `codex` in its environment, set an explicit binary path:
+如果 hook 环境找不到 `codex`，配置显式路径：
 
 ```bash
 sh scripts/run-node.sh scripts/english-buddy.mjs config --set codex_cli_binary=/path/to/codex
 ```
 
-Prerequisites:
+前置条件：
 
-- Codex CLI is installed and `codex exec` works from your shell.
-- The user is signed in and has a usable Codex model.
-- The English Buddy hook is enabled and trusted.
-- Node.js is `>=18.18.0`.
-- The hook can find `codex`, or `codex_cli_binary` is configured.
-- The child `codex exec` run finishes before `codex_cli_timeout_sec`.
+- 已安装 Codex CLI，并且 `codex exec` 可以在 shell 中正常运行。
+- 用户已登录，并且有可用的 Codex 模型。
+- English Buddy hook 已启用并被信任。
+- Node.js 版本为 `>=18.18.0`。
+- hook 能找到 `codex`，或者已配置 `codex_cli_binary`。
+- 子进程 `codex exec` 能在 `codex_cli_timeout_sec` 内完成。
 
-If `codex_cli` fails, times out, or returns invalid structured output, English Buddy falls back to `host_model` for that turn and writes a `limited` record.
+如果 `codex_cli` 失败、超时或返回无效结构化输出，English Buddy 会在该轮回退到 `host_model`，并写入一条 `limited` 记录。
 
-## Project Files
+## 项目文件
 
-- User-facing plugin docs: `plugins/codex-english-buddy/README.md`
-- Privacy policy: `plugins/codex-english-buddy/PRIVACY.md`
-- License: `LICENSE`
-- Safe project config template: `.codex-english-buddy.example.json`
+- 插件用户文档：`plugins/codex-english-buddy/README.md`
+- 隐私政策：`plugins/codex-english-buddy/PRIVACY.md`
+- License：`LICENSE`
+- 安全项目配置模板：`.codex-english-buddy.example.json`
 
-## Local Validation
+## 本地验证
 
 ```bash
 cd plugins/codex-english-buddy
@@ -246,22 +246,22 @@ npm test
 npm run validate:codex
 ```
 
-## Acknowledgements
+## 致谢
 
-Thanks to [xiaolai/claude-english-buddy-for-claude](https://github.com/xiaolai/claude-english-buddy-for-claude) for the original English Buddy workflow and learning-report inspiration.
+感谢 [xiaolai/claude-english-buddy-for-claude](https://github.com/xiaolai/claude-english-buddy-for-claude) 提供原始 English Buddy 工作流和学习报告设计灵感。
 
-### Main Functional Differences
+### 主要差异
 
-| Area | `codex-english-buddy` | `claude-english-buddy-for-claude` |
+| 对比项 | `codex-english-buddy` | `claude-english-buddy-for-claude` |
 |---|---|---|
-| Host | Codex Desktop and Codex CLI where supported | Claude Code |
-| Packaging | Codex plugin with `.codex-plugin/plugin.json`, bundled hooks, skills, and local marketplace metadata | Claude Code plugin installed from the xiaolai marketplace |
-| Hook integration | Bundled Codex `UserPromptSubmit` and `SessionEnd` hooks; prompt coaching is injected through Codex hook output and can differ between Desktop and CLI hosts | Claude Code hook workflow that corrects, translates, or refines prompts before Claude responds |
-| Default behavior | Providerless `host_model` uses lightweight detection and lets the active Codex model produce the visible translation, correction, or refinement in the same turn | Corrects English prompts, translates non-English prompts, refines `::` prompts, and stays quiet for clean prompts |
-| History quality | Default `host_model` records limited history and never invents corrected text or annotations | Keeps correction history that powers the original today, stats, mistakes, and drill reports |
-| Full-history mode | Optional `codex_cli` engine writes verified correction pairs when preprocessing succeeds | Full correction history is the normal basis for recurring mistakes, drills, and trend reports |
-| Export | Adds `$codex-english-buddy:export` to export full-history original/transformed records as Markdown, CSV, or JSON with date, range, format, output, and stdout options | No equivalent export command in the original plugin |
-| Command surface | Skill-backed entries such as `$codex-english-buddy:today`; native CLI slash support is host-dependent | Native slash commands such as `/claude-english-buddy:today`, `/claude-english-buddy:stats`, `/claude-english-buddy:mistakes`, `/claude-english-buddy:review`, and `/claude-english-buddy:config` |
+| 宿主 | Codex Desktop 和可支持的 Codex CLI | Claude Code |
+| 打包方式 | Codex 插件，包含 `.codex-plugin/plugin.json`、插件自带 hooks、skills 和本地 marketplace metadata | 从 xiaolai marketplace 安装的 Claude Code 插件 |
+| Hook 集成 | 插件自带 Codex `UserPromptSubmit` 和 `SessionEnd` hooks；提示词辅导通过 Codex hook output 注入，Desktop 和 CLI 宿主表现可能不同 | Claude Code hook 工作流，在 Claude 回复前纠错、翻译或润色提示词 |
+| 默认行为 | 默认 providerless `host_model` 只做轻量检测，由当前 Codex 主模型在同一轮对话里生成可见的翻译、纠错或润色结果 | 纠正英文提示词、翻译非英文提示词、润色 `::` 提示词；干净提示词保持安静 |
+| 历史质量 | 默认 `host_model` 只写 limited history，不伪造 corrected text 或 annotations | 保存 correction history，用于原版 today、stats、mistakes 和 drill 报告 |
+| Full-history 模式 | 可选 `codex_cli` 引擎，预处理成功时写入已验证 correction pairs | Full correction history 是 recurring mistakes、drills 和趋势报告的默认数据基础 |
+| Export | 新增 `$codex-english-buddy:export`，可将 full-history 原句和转换结果导出为 Markdown、CSV 或 JSON，并支持单日、日期范围、格式、输出路径和 stdout 参数 | 原版没有对应的 export 命令 |
+| 命令入口 | `$codex-english-buddy:today` 等 skill-backed 入口；原生 CLI slash 是否可用取决于 host | 原生 slash commands，例如 `/claude-english-buddy:today`、`/claude-english-buddy:stats`、`/claude-english-buddy:mistakes`、`/claude-english-buddy:review`、`/claude-english-buddy:config` |
 
 ## License
 

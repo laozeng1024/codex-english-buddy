@@ -63,31 +63,32 @@ test("release metadata uses the public GitHub repository and stable version", ()
 });
 
 test("public docs describe GitHub/local marketplace install and CLI skill entry", () => {
-  const rootReadme = readRepo("README.md");
-  const chineseReadme = readRepo("README.zh-CN.md");
+  const rootChineseReadme = readRepo("README.md");
+  const rootEnglishReadme = readRepo("README.en.md");
   const pluginReadme = readPlugin("README.md");
   const pluginChineseReadme = readPlugin("README.zh-CN.md");
-  for (const readme of [rootReadme, pluginReadme]) {
+  for (const readme of [rootEnglishReadme, pluginReadme]) {
     assert.match(readme, /git clone https:\/\/github\.com\/laozeng1024\/codex-english-buddy\.git/);
     assert.match(readme, /codex plugin marketplace add "\$PWD"/);
     assert.match(readme, /codex plugin add codex-english-buddy@laozeng1024/);
     assert.match(readme, /\$codex-english-buddy:today/);
     assert.match(readme, /Official Codex Marketplace distribution is a future\/to-be-confirmed path/);
   }
-  assert.match(rootReadme, /Language: English is the default README/);
-  assert.match(rootReadme, /README\.zh-CN\.md/);
+  assert.match(rootEnglishReadme, /Language: Chinese is the default README/);
+  assert.match(rootEnglishReadme, /README\.md/);
+  assert.match(rootChineseReadme, /英文 README 见/);
+  assert.match(rootChineseReadme, /README\.en\.md/);
   assert.match(pluginReadme, /Language: English is the default README/);
   assert.match(pluginReadme, /README\.zh-CN\.md/);
-  assert.match(chineseReadme, /默认英文 README/);
   assert.match(pluginChineseReadme, /默认英文 README/);
 });
 
 test("README documents concrete command list and license", () => {
-  const rootReadme = readRepo("README.md");
-  const chineseReadme = readRepo("README.zh-CN.md");
+  const rootChineseReadme = readRepo("README.md");
+  const rootEnglishReadme = readRepo("README.en.md");
   const pluginReadme = readPlugin("README.md");
   const pluginChineseReadme = readPlugin("README.zh-CN.md");
-  for (const readme of [rootReadme, pluginReadme]) {
+  for (const readme of [rootEnglishReadme, pluginReadme]) {
     assert.match(readme, /## Commands/);
     assert.match(readme, /\| Purpose \| Desktop \/ Skill Host \| Codex CLI Chat \|/);
     assert.doesNotMatch(readme, /Shell Fallback/);
@@ -107,7 +108,7 @@ test("README documents concrete command list and license", () => {
     assert.match(readme.trim(), /## License\n\nISC$/);
     assert.equal(readme.trim().split("\n").filter((line) => line.startsWith("## ")).at(-1), "## License");
   }
-  for (const readme of [chineseReadme, pluginChineseReadme]) {
+  for (const readme of [rootChineseReadme, pluginChineseReadme]) {
     assert.match(readme, /## 命令列表/);
     assert.match(readme, /\| 用途 \| Desktop \/ Skill 宿主 \| Codex CLI Chat \|/);
     assert.doesNotMatch(readme, /Shell 备用入口/);
@@ -130,11 +131,11 @@ test("README documents concrete command list and license", () => {
 });
 
 test("README documents how to enable codex_cli full-history mode", () => {
-  const rootReadme = readRepo("README.md");
-  const chineseReadme = readRepo("README.zh-CN.md");
+  const rootChineseReadme = readRepo("README.md");
+  const rootEnglishReadme = readRepo("README.en.md");
   const pluginReadme = readPlugin("README.md");
   const pluginChineseReadme = readPlugin("README.zh-CN.md");
-  for (const readme of [rootReadme, pluginReadme]) {
+  for (const readme of [rootEnglishReadme, pluginReadme]) {
     assert.match(readme, /Enable Full-History Mode|Full-History Engine/);
     assert.match(readme, /config --set engine=codex_cli/);
     assert.match(readme, /"engine": "codex_cli"/);
@@ -147,7 +148,7 @@ test("README documents how to enable codex_cli full-history mode", () => {
     assert.match(readme, /falls back to `host_model`/);
     assert.match(readme, /writes a `limited` record/);
   }
-  for (const readme of [chineseReadme, pluginChineseReadme]) {
+  for (const readme of [rootChineseReadme, pluginChineseReadme]) {
     assert.match(readme, /启用完整历史模式|完整历史引擎/);
     assert.match(readme, /config --set engine=codex_cli/);
     assert.match(readme, /"engine": "codex_cli"/);
@@ -164,11 +165,11 @@ test("README documents how to enable codex_cli full-history mode", () => {
 });
 
 test("README documents upstream reference and Codex functional differences", () => {
-  const rootReadme = readRepo("README.md");
-  const chineseReadme = readRepo("README.zh-CN.md");
+  const rootChineseReadme = readRepo("README.md");
+  const rootEnglishReadme = readRepo("README.en.md");
   const pluginReadme = readPlugin("README.md");
   const pluginChineseReadme = readPlugin("README.zh-CN.md");
-  for (const readme of [rootReadme, chineseReadme, pluginReadme, pluginChineseReadme]) {
+  for (const readme of [rootEnglishReadme, rootChineseReadme, pluginReadme, pluginChineseReadme]) {
     assert.match(readme, /https:\/\/github\.com\/xiaolai\/claude-english-buddy-for-claude/);
     assert.match(readme, /English Buddy/);
     assert.match(readme, /\|.*codex-english-buddy.*\|.*claude-english-buddy-for-claude.*\|/);
@@ -178,53 +179,53 @@ test("README documents upstream reference and Codex functional differences", () 
     assert.match(readme, /codex_cli/);
     assert.match(readme, /\$codex-english-buddy:today/);
   }
-  assert.match(rootReadme, /## Acknowledgements/);
-  assert.match(rootReadme, /### Main Functional Differences/);
+  assert.match(rootEnglishReadme, /## Acknowledgements/);
+  assert.match(rootEnglishReadme, /### Main Functional Differences/);
   assert.match(pluginReadme, /## Acknowledgements/);
   assert.match(pluginReadme, /### Main Functional Differences/);
-  assert.match(chineseReadme, /## 致谢/);
-  assert.match(chineseReadme, /### 主要差异/);
+  assert.match(rootChineseReadme, /## 致谢/);
+  assert.match(rootChineseReadme, /### 主要差异/);
   assert.match(pluginChineseReadme, /## 致谢/);
   assert.match(pluginChineseReadme, /### 主要差异/);
-  assert.match(rootReadme, /\| Area \| `codex-english-buddy` \| `claude-english-buddy-for-claude` \|/);
+  assert.match(rootEnglishReadme, /\| Area \| `codex-english-buddy` \| `claude-english-buddy-for-claude` \|/);
   assert.match(pluginReadme, /\| Area \| `codex-english-buddy` \| `claude-english-buddy-for-claude` \|/);
-  assert.match(chineseReadme, /\| 对比项 \| `codex-english-buddy` \| `claude-english-buddy-for-claude` \|/);
+  assert.match(rootChineseReadme, /\| 对比项 \| `codex-english-buddy` \| `claude-english-buddy-for-claude` \|/);
   assert.match(pluginChineseReadme, /\| 对比项 \| `codex-english-buddy` \| `claude-english-buddy-for-claude` \|/);
-  assert.match(rootReadme, /\| Hook integration \|/);
+  assert.match(rootEnglishReadme, /\| Hook integration \|/);
   assert.match(pluginReadme, /\| Hook integration \|/);
-  assert.match(chineseReadme, /\| Hook 集成 \|/);
+  assert.match(rootChineseReadme, /\| Hook 集成 \|/);
   assert.match(pluginChineseReadme, /\| Hook 集成 \|/);
-  assert.match(rootReadme, /\| Export \| Adds `\$codex-english-buddy:export`/);
+  assert.match(rootEnglishReadme, /\| Export \| Adds `\$codex-english-buddy:export`/);
   assert.match(pluginReadme, /\| Export \| Adds `\$codex-english-buddy:export`/);
-  assert.match(chineseReadme, /\| Export \| 新增 `\$codex-english-buddy:export`/);
+  assert.match(rootChineseReadme, /\| Export \| 新增 `\$codex-english-buddy:export`/);
   assert.match(pluginChineseReadme, /\| Export \| 新增 `\$codex-english-buddy:export`/);
-  assert.match(rootReadme, /No equivalent export command in the original plugin/);
+  assert.match(rootEnglishReadme, /No equivalent export command in the original plugin/);
   assert.match(pluginReadme, /No equivalent export command in the original plugin/);
-  assert.match(chineseReadme, /原版没有对应的 export 命令/);
+  assert.match(rootChineseReadme, /原版没有对应的 export 命令/);
   assert.match(pluginChineseReadme, /原版没有对应的 export 命令/);
-  assert.doesNotMatch(rootReadme, /\| Paths \|/);
+  assert.doesNotMatch(rootEnglishReadme, /\| Paths \|/);
   assert.doesNotMatch(pluginReadme, /\| Paths \|/);
-  assert.doesNotMatch(chineseReadme, /\| 路径 \|/);
+  assert.doesNotMatch(rootChineseReadme, /\| 路径 \|/);
   assert.doesNotMatch(pluginChineseReadme, /\| 路径 \|/);
-  assert.match(rootReadme, /\/claude-english-buddy:today/);
-  assert.match(rootReadme, /\/claude-english-buddy:stats/);
-  assert.match(rootReadme, /\/claude-english-buddy:mistakes/);
-  assert.match(rootReadme, /\/claude-english-buddy:review/);
-  assert.match(rootReadme, /\/claude-english-buddy:config/);
-  assert.match(chineseReadme, /\/claude-english-buddy:today/);
-  assert.match(chineseReadme, /\/claude-english-buddy:stats/);
-  assert.match(chineseReadme, /\/claude-english-buddy:mistakes/);
-  assert.match(chineseReadme, /\/claude-english-buddy:review/);
-  assert.match(chineseReadme, /\/claude-english-buddy:config/);
+  assert.match(rootEnglishReadme, /\/claude-english-buddy:today/);
+  assert.match(rootEnglishReadme, /\/claude-english-buddy:stats/);
+  assert.match(rootEnglishReadme, /\/claude-english-buddy:mistakes/);
+  assert.match(rootEnglishReadme, /\/claude-english-buddy:review/);
+  assert.match(rootEnglishReadme, /\/claude-english-buddy:config/);
+  assert.match(rootChineseReadme, /\/claude-english-buddy:today/);
+  assert.match(rootChineseReadme, /\/claude-english-buddy:stats/);
+  assert.match(rootChineseReadme, /\/claude-english-buddy:mistakes/);
+  assert.match(rootChineseReadme, /\/claude-english-buddy:review/);
+  assert.match(rootChineseReadme, /\/claude-english-buddy:config/);
 });
 
 test("README documents usage examples in English and Chinese", () => {
-  const rootReadme = readRepo("README.md");
-  const chineseReadme = readRepo("README.zh-CN.md");
+  const rootChineseReadme = readRepo("README.md");
+  const rootEnglishReadme = readRepo("README.en.md");
   const pluginReadme = readPlugin("README.md");
   const pluginChineseReadme = readPlugin("README.zh-CN.md");
 
-  for (const readme of [rootReadme, pluginReadme]) {
+  for (const readme of [rootEnglishReadme, pluginReadme]) {
     assert.match(readme, /## Usage Examples/);
     assert.match(readme, /Translate A Chinese Prompt/);
     assert.match(readme, /Correct An English Prompt/);
@@ -244,7 +245,7 @@ test("README documents usage examples in English and Chinese", () => {
     assert.match(readme, /Skipped limited records: 4/);
   }
 
-  for (const readme of [chineseReadme, pluginChineseReadme]) {
+  for (const readme of [rootChineseReadme, pluginChineseReadme]) {
     assert.match(readme, /## 使用示例/);
     assert.match(readme, /翻译中文提示词/);
     assert.match(readme, /修正英文提示词/);
